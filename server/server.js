@@ -8,14 +8,16 @@ const path = require('path');
 const app = express();
 const router = express.Router();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 router.get('/', (req, res) => {
   res.send("MVP is alive...")
 })
 
-router.post('/POST', (req, res) => {
-  console.log(req.body);
+router.post('/newSchedule', (req, res) => {
+  console.log(req.body)
   res.send("POSTED")
 });
 
