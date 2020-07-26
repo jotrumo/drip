@@ -1,9 +1,9 @@
 const express = require('express');
 const PORT = process.env.PORT || 3000;
+const axios = require('axios');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const morgan = require('morgan');
 const path = require('path');
+const method = require('./helpers/methods.js');
 
 const app = express();
 const router = express.Router();
@@ -18,7 +18,10 @@ router.get('/', (req, res) => {
 
 router.post('/newSchedule', (req, res) => {
   console.log(req.body)
-  res.send("POSTED")
+  axios.get(`https://geocode.xyz/${req.body.city},${req.body.state}?json=1`)
+  .then(loc => method.modifyCoordinates(loc.data.longt, loc.data.latt))
+  .then(data => method.getForecast(data))
+  
 });
 
 app.use('/', router);
