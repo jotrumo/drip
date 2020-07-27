@@ -8,14 +8,36 @@ class Dashboard extends React.Component {
     super(props)
 
     this.state ={
+      currentAddress: '',
       currentCity: '',
       currentState: '',
-      currentWaterEvents: 0
+      currentWaterEvents: 0,
+      forecast: {},
+      currentUser: props.currentUser,
+      currentSchedule: false,
     }
+
+    this.handleAddress = this.handleAddress.bind(this);
     this.handleCity = this.handleCity.bind(this);
     this.handleState = this.handleState.bind(this);
     this.handleEvents = this.handleEvents.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+  }
+
+  componentDidUpdate(prevState) {
+    if(prevState !== this.state) {
+      console.log("STATE HAS UPDATED")
+      console.log("STATE", this.state.forecast)
+    }
+  }
+
+  handleAddress(e) {
+    this.setState({
+      currentAddress: e.target.value,
+    })
   }
 
   handleCity(e) {
@@ -38,27 +60,46 @@ class Dashboard extends React.Component {
   }
 
   handleSubmit(e) {
-
-    axios.post('http://localhost:3000/newSchedule', ({ city: this.state.currentCity, state: this.state.currentState, events: this.state.currentWaterEvents}))
-    .then(res => console.log(res))
+    e.preventDefault();
+    axios.post('http://localhost:3000/newSchedule', ({ address: this.state.currentAddress, city: this.state.currentCity, state: this.state.currentState, events: this.state.currentWaterEvents}))
+    .then(data => this.setState({
+      forecast: data.data,
+      currentSchedule: true,
+    }))
   };
 
   render() {
-
-    return(
-      <div>
-        <h1>drip</h1>
-        <h2>Dashboard</h2>
+    if (this.state.currentSchedule === false) {
+      return(
         <div>
-          <h3>Set New Schedule</h3>
-          <RequestSchedule handleCity={this.handleCity} handleState={this.handleState} handleEvents={this.handleEvents} handleSubmit={this.handleSubmit} />
+          <h1>drip</h1>
+          <h2>Dashboard</h2>
+          <h3> Hello {this.state.currentUser.firstName}</h3>
+          <h6>Sign Out</h6>
+          <div>
+            <h3>Set New Schedule</h3>
+            <RequestSchedule handleAddress={this.handleAddress} handleCity={this.handleCity} handleState={this.handleState} handleEvents={this.handleEvents} handleSubmit={this.handleSubmit} />
+          </div>
         </div>
+      )
+    } else {
+      return(
         <div>
-          <h3>Current Schedule</h3>
-          <CurrentSchedule/>
+          <h1>drip</h1>
+          <h2>Dashboard</h2>
+          <h3> Hello {this.state.currentUser.firstName}</h3>
+          <h6>Sign Out</h6>
+          <div>
+            <h3>Set New Schedule</h3>
+            <RequestSchedule handleAddress={this.handleAddress} handleCity={this.handleCity} handleState={this.handleState} handleEvents={this.handleEvents} handleSubmit={this.handleSubmit} />
+          </div>
+          <div>
+            <h3>Your 7-Day Schedule</h3>
+            <CurrentSchedule forecast={this.state.forecast}/>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
