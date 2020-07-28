@@ -92,8 +92,13 @@ var getSchedule = (pForecast, pEvents) => {
   let schedule = pForecast
 
   if (pEvents === '2') {
+    for (let i = 0; i < schedule.length; i = i + 5) {
+      schedule[i].duration = 30
+    }
+  }
+  if (pEvents === '3') {
     for (let i = 0; i <= schedule.length - 1; i = i + 3) {
-      schedule[i].duration = 10
+      schedule[i].duration = 20
     }
   }
   if (pEvents === '4') {
@@ -101,6 +106,7 @@ var getSchedule = (pForecast, pEvents) => {
       schedule[i].duration = 15
     }
   }
+
   return schedule
 }
 
