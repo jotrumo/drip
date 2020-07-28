@@ -16,8 +16,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 //routes
-router.get('/', (req, res) => {
-  res.send("MVP is alive...")
+router.get('/flora', (req, res) => {
+  controller.getAllFlora((err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
+  })
 })
 
 router.post('/newSchedule', (req, res) => {

@@ -1,15 +1,21 @@
 import React from 'react';
+import FloraMenu from './FloraMenu.jsx';
 
 var RequestSchedule = (props) => {
   console.log(props)
 
+  let FloraSelection = props.flora.map((data, index) => (
+    <FloraMenu key={index} data={data}/>
+  ))
+
   return(
     <form onSubmit={props.handleSubmit}>
-      <label id='address'>Street Address: <input onChange={props.handleAddress}></input></label>
-      <label id="city">City: <input onChange={props.handleCity}></input></label>
-      <label id="state">State: <input onChange={props.handleState}></input></label>
-      <label id="weekly-events">Weekly Events: <input onChange={props.handleEvents}></input></label>
-      <button>Submit</button>
+      <label style={{marginRight: '20px'}} id='address'>Street Address: <input onChange={props.handleAddress}></input></label>
+      <label style={{marginRight: '20px'}} id="city">City: <input onChange={props.handleCity}></input></label>
+      <label style={{marginRight: '20px'}} id="state">State: <input onChange={props.handleState}></input></label>
+      <label style={{marginRight: '20px'}} id="weekly-events">Total Events: <input onChange={props.handleEvents}></input></label>
+      <label style={{marginRight: '20px'}} id="flora">Item: <select>{FloraSelection}</select></label>
+      <button style={{width: '115px'}}>Submit</button>
     </form>
   )
 }

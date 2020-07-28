@@ -36,7 +36,7 @@ var utcToLocal = (pTime, pDiff) => {
   console.log(hour, diffInt)
   let newHour = hour - (diffInt + 1)
   timeArray[0] = newHour
-  let result = timeArray.join(':') + ' AM'
+  let result = `${dateArray[0].split('"').pop()} ${timeArray.join(':')} AM `
   return result;
 }
 

@@ -41,10 +41,17 @@ const getShrubs = ((pType, callback) => {
   .catch(err => callback(err, null))
 })
 
+const getAllFlora = (callback) => {
+  model.Flora.findAll({})
+  .then(data => callback(null, data))
+  .catch(err => callback(err, null))
+}
+
 module.exports = {
   getUser: getUser,
   getTrees: getTrees,
   getGrasses: getGrasses,
   getShrubs: getShrubs,
+  getAllFlora: getAllFlora,
 }
 

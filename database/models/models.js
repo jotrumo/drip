@@ -15,8 +15,8 @@ const User = sequelize.define("user", {
 const Flora = sequelize.define("plant", {
   name: DataTypes.STRING,
   type: DataTypes.STRING,
-  GpW: DataTypes.INTEGER,
-  IpW: DataTypes.INTEGER,
+  gpw: DataTypes.INTEGER,
+  ipw: DataTypes.INTEGER,
   events: DataTypes.INTEGER,
 });
 
