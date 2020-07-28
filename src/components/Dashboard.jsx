@@ -1,20 +1,22 @@
 import React from 'react';
 import RequestSchedule from './RequestSchedule.jsx';
 import CurrentSchedule from './CurrentSchedule.jsx';
+import EmptyView from './EmptyView.jsx';
 import axios from 'axios';
 import styled from 'styled-components'
 
 const DashboardWrapper = styled.div`
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  position: relative
-
+  position: relative;
+  width: 100%;
+  background: #f4f4f4;
+  height: 800px;
 `;
 
 const HeaderWrapper = styled.div`
   width: 100%;
   height: 75px;
   position: relative;
-
 `;
 
 const Header = styled.span`
@@ -34,40 +36,71 @@ const UserGreeting = styled.span`
 
 const SubHeadingWrapper = styled.div`
   width: 100%;
-  height: 125px;
+  height: 75px;
   position: relative;
+  background: #f4f4f4;
 `;
 
 const SubHeader = styled.div`
   position: absolute;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
   left: 150px;
-  top: 60px;
+  top: 55px;
   padding-left: 5px;
+  background: #f4f4f4;
 `;
 
-const Menu = styled.span`
-  margin-left: 150px;
+const Menu = styled.div`
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  display: flex;
   width: 100%;
+  height: 40px;
   padding-left: 5px;
+  background: black;
 `;
 
-const MenuItem = styled.span`
-  margin-right: 100px;
+const MenuItem = styled.div`
+  margin-left: 100px;
+  font-weight: bold;
+  color: white;
+  padding-top: 6px;
+  font-size: 18px;
 `;
 
-const SignOut = styled.span`
-  margin-left: 650px;
-  padding-right: 5px;
+const MenuItemHome = styled.div`
+  margin-left: 155px;
+  font-weight: bold;
+  color: white;
+  padding-top: 6px;
+  font-size: 18px;
+`;
+
+const SignOut = styled.div`
+  font-weight: bold;
+  color: white;
+  padding-top: 6px;
+  font-size: 18px;
+  margin-left: 675px;
 `;
 
 const ScheduleInput = styled.div`
   margin-left: 150px;
-
   top: 1000%;
+`;
+
+const CurrentView = styled.div`
+  display: flex;
+  position: relative;
+  margin-left: 175px;
+  margin-top : 15px;
+  width: 100%;
+  height: 421px;
+`;
+
+const Img = styled.div`
+  margin-left: 50px;
 `;
 
 class Dashboard extends React.Component {
@@ -155,15 +188,20 @@ class Dashboard extends React.Component {
             <UserGreeting> Hello {this.state.currentUser.firstName}</UserGreeting>
           </HeaderWrapper>
           <SubHeadingWrapper>
-            <Menu><MenuItem>Home</MenuItem><MenuItem>Interface</MenuItem><MenuItem>Help</MenuItem><MenuItem>Account Settings</MenuItem><SignOut>Sign Out</SignOut></Menu>
+            <Menu><MenuItemHome>Home</MenuItemHome><MenuItem>Interface</MenuItem><MenuItem>Help</MenuItem><MenuItem>Account Settings</MenuItem><SignOut>Sign Out</SignOut></Menu>
             <SubHeader>Dashboard</SubHeader>
           </SubHeadingWrapper>
           <ScheduleInput>
-            <h3 style={{paddingLeft: '5px'}}>Set New Schedule</h3>
+            <h3 style={{paddingLeft: '6px', fontWeight: '500'}}>Set New Schedule</h3>
             <div style={{paddingLeft: '5px'}}>
               <RequestSchedule flora={this.state.flora} handleAddress={this.handleAddress} handleCity={this.handleCity} handleState={this.handleState} handleEvents={this.handleEvents} handleSubmit={this.handleSubmit} />
             </div>
           </ScheduleInput>
+          <h3 style={{marginLeft: '150px'}}>Your 7-Day Schedule</h3>
+          <CurrentView>
+            <div><EmptyView/></div>
+            <Img><img src='https://hrphxfec.s3-us-west-1.amazonaws.com/mvp/generic-blog.jpg' style={{width: 'auto', height: '100%'}}></img></Img>
+          </CurrentView>
         </DashboardWrapper>
       )
     } else if (this.state.currentSchedule === true && this.state.isMounted === true) {
@@ -174,19 +212,20 @@ class Dashboard extends React.Component {
             <UserGreeting> Hello {this.state.currentUser.firstName}</UserGreeting>
           </HeaderWrapper>
           <SubHeadingWrapper>
-            <Menu><MenuItem>Home</MenuItem><MenuItem>Interface</MenuItem><MenuItem>Help</MenuItem><MenuItem>Account Settings</MenuItem><SignOut>Sign Out</SignOut></Menu>
+            <Menu><MenuItemHome>Home</MenuItemHome><MenuItem>Interface</MenuItem><MenuItem>Help</MenuItem><MenuItem>Account Settings</MenuItem><SignOut>Sign Out</SignOut></Menu>
             <SubHeader>Dashboard</SubHeader>
           </SubHeadingWrapper>
           <ScheduleInput>
-            <h3 style={{paddingLeft: '5px'}}>Set New Schedule</h3>
+            <h3 style={{paddingLeft: '6px', fontWeight: '500'}}>Set New Schedule</h3>
             <div style={{paddingLeft: '5px'}}>
               <RequestSchedule flora={this.state.flora} handleAddress={this.handleAddress} handleCity={this.handleCity} handleState={this.handleState} handleEvents={this.handleEvents} handleSubmit={this.handleSubmit} />
             </div>
-            <div>
-            <h3 style={{paddingLeft: '5px'}}>Your 7-Day Schedule</h3>
-            <CurrentSchedule forecast={this.state.forecast}/>
-            </div>
           </ScheduleInput>
+          <h3 style={{marginLeft: '150px'}}>Your 7-Day Schedule</h3>
+          <CurrentView>
+            <div><CurrentSchedule forecast={this.state.forecast}/></div>
+            <Img><img src='https://hrphxfec.s3-us-west-1.amazonaws.com/mvp/generic-blog.jpg' style={{width: 'auto', height: '100%'}}></img></Img>
+          </CurrentView>
         </DashboardWrapper>
       )
     } else {

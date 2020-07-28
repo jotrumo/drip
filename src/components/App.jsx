@@ -1,5 +1,11 @@
 import React from 'react';
 import Dashboard from './Dashboard.jsx';
+import styled from 'styled-components';
+
+const AppWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -44,14 +50,16 @@ class App extends React.Component {
   render() {
     if (this.state.verifiedUser === false) {
       return (
-        <div>
+        <AppWrapper>
           <h1>drip</h1>
           <button onClick={this.enterDashboard}>ENTER</button>
-        </div>
+        </AppWrapper>
       )
     } else if ( this.state.verifiedUser === true) {
       return(
-        <Dashboard currentUser={this.state.currentUser}/>
+        <AppWrapper>
+          <Dashboard currentUser={this.state.currentUser}/>
+        </AppWrapper>
       )
     }
   }

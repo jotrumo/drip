@@ -4,8 +4,15 @@ import styled from 'styled-components';
 const DataCellWrapper = styled.div`
   font-size: 12px;
   border: 1px solid black;
-  width: 40%;
+  width: 550;
   height: 50px;
+  background: white;
+  margin-bottom: 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 0;
+  padding: 10px 5px 10px 5px;
+  border: 0;
+  outline: none;
+  border-radius: 4px;
 `;
 
 var DataCell = (props) => {
