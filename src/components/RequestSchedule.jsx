@@ -55,7 +55,7 @@ var RequestSchedule = (props) => {
       <label style={{marginRight: '20px'}} id="city">City: <Input onChange={props.handleCity}></Input></label>
       <label style={{marginRight: '20px'}} id="state">State: <Input onChange={props.handleState}></Input></label>
       <label style={{marginRight: '20px'}} id="weekly-events">Total Events: <Input onChange={props.handleEvents}></Input></label>
-      <label style={{marginRight: '20px'}} id="flora">Item: <Select>{FloraSelection}</Select></label>
+      <label style={{marginRight: '20px'}} id="flora">Item: <Select><option className='placeholder' defaultValue={'Select an Item'} hidden>Select an Item</option>{FloraSelection}</Select></label>
       <Button>Submit</Button>
     </form>
   )

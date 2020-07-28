@@ -44,7 +44,7 @@ const SubHeadingWrapper = styled.div`
 const SubHeader = styled.div`
   position: absolute;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
   left: 150px;
   top: 55px;
   padding-left: 5px;
@@ -197,7 +197,7 @@ class Dashboard extends React.Component {
               <RequestSchedule flora={this.state.flora} handleAddress={this.handleAddress} handleCity={this.handleCity} handleState={this.handleState} handleEvents={this.handleEvents} handleSubmit={this.handleSubmit} />
             </div>
           </ScheduleInput>
-          <h3 style={{marginLeft: '150px'}}>Your 7-Day Schedule</h3>
+          <h3 style={{marginLeft: '150px', paddingLeft: '6px', fontWeight: '500'}}>Your 7-Day Schedule</h3>
           <CurrentView>
             <div><EmptyView/></div>
             <Img><img src='https://hrphxfec.s3-us-west-1.amazonaws.com/mvp/generic-blog.jpg' style={{width: 'auto', height: '100%'}}></img></Img>
@@ -221,7 +221,7 @@ class Dashboard extends React.Component {
               <RequestSchedule flora={this.state.flora} handleAddress={this.handleAddress} handleCity={this.handleCity} handleState={this.handleState} handleEvents={this.handleEvents} handleSubmit={this.handleSubmit} />
             </div>
           </ScheduleInput>
-          <h3 style={{marginLeft: '150px'}}>Your 7-Day Schedule</h3>
+          <h3 style={{marginLeft: '150px', paddingLeft: '6px', fontWeight: '500'}}>Your 7-Day Schedule</h3>
           <CurrentView>
             <div><CurrentSchedule forecast={this.state.forecast}/></div>
             <Img><img src='https://hrphxfec.s3-us-west-1.amazonaws.com/mvp/generic-blog.jpg' style={{width: 'auto', height: '100%'}}></img></Img>
