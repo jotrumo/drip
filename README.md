@@ -1,5 +1,5 @@
 # drip
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
+Optimize your landscaping irrigation systems with real-time environmental data.
 
 Requirements
 node (12.13.0)
